@@ -1,1 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naval System</title>
 
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      overflow:hidden;
+    }
+
+    /* ================= FRONT PAGE ================= */
+
+    .page{
+      width:100%;
+      height:100vh;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Background slideshow */
+    .slideshow{
+      position:absolute;
+      width:100%;
+      height:100%;
+      z-index:-2;
+    }
+
+    .slide{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background-size:cover;
+      background-position:center;
+      opacity:0;
+      animation:slideShow 30s infinite;
+    }
+
+    .slide:nth-child(1){
+      background-image:url('https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1920&auto=format&fit=crop');
+      animation-delay:0s;
+    }
+
+    .slide:nth-child(2){
+      background-image:url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1920&auto=format&fit=crop');
+      animation-delay:5s;
+    }
+
+    .slide:nth-child(3){
+      background-image:url('https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?q=80&w=1920&auto=format&fit=crop');
+      animation-delay:10s;
+    }
+
+    .slide:nth-child(4){
+      background-image:url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1920&auto=format&fit=crop');
+      animation-delay:15s;
+    }
+
+    .slide:nth-child(5){
+      background-image:url('https://images.unsplash.com/photo-1494412519320-aa613dfb7738?q=80&w=1920&auto=format&fit=crop');
+      animation-delay:20s;
+    }
+
+    .slide:nth-child(6){
+      background-image:url('https://images.unsplash.com/photo-1508615070457-7baeba4003ab?q=80&w=1920&auto=format&fit=crop');
+      animation-delay:25s;
+    }
+
+    @keyframes slideShow{
+      0%{opacity:0;}
+      10%{opacity:1;}
+      25%{opacity:1;}
+      35%{opacity:0;}
+      100%{opacity:0;}
+    }
+
+    /* Dark overlay */
+    .overlay{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.55);
+      z-index:-1;
+    }
+
+    /* Navigation */
+    nav{
+      width:100%;
+      display:flex;
+      justify-content:flex-end;
+      padding:25px 60px;
+      position:absolute;
+      top:0;
+      right:0;
+      z-index:10;
+    }
+
+    nav ul{
+      display:flex;
+      gap:20px;
+      list-style:none;
+    }
+
+    nav ul li button{
+      padding:12px 28px;
+      border:none;
+      border-radius:30px;
+      background:rgba(255,255,255,0.15);
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+      transition:0.4s;
+    }
+
+    nav ul li button:hover{
+      background:#00bfff;
+      transform:scale(1.08);
+      box-shadow:0 0 15px #00bfff;
+    }
+
+    /* Center Content */
+    .content{
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      text-align:center;
+    }
+
+    .content h1{
+      font-size:90px;
+      letter-spacing:4px;
+      text-shadow:0 0 20px cyan;
+      animation:glow 2s infinite alternate;
+    }
+
+    .content h2{
+      margin-top:20px;
+      font-size:42px;
+      color:#00d9ff;
+      letter-spacing:8px;
+    }
+
+    @keyframes glow{
+      from{
+        text-shadow:0 0 10px cyan;
+      }
+      to{
+        text-shadow:0 0 30px cyan,
+                     0 0 60px cyan;
+      }
+    }
+
+    /* Click Button */
+    .click-btn{
+      position:absolute;
+      left:50px;
+      bottom:60px;
+    }
+
+    .click-btn button{
+      padding:16px 35px;
+      font-size:18px;
+      border:none;
+      border-radius:40px;
+      background:#00bfff;
+      color:white;
+      cursor:pointer;
+      transition:0.4s;
+      box-shadow:0 0 20px #00bfff;
+    }
+
+    .click-btn button:hover{
+      transform:translateY(-5px) scale(1.05);
+      background:white;
+      color:#0077ff;
+    }
+
+    /* ================= SECOND PAGE ================= */
+
+    .second-page{
+      width:100%;
+      height:100vh;
+      background:linear-gradient(to right,#000428,#004e92);
+      position:absolute;
+      top:100%;
+      left:0;
+      transition:1s;
+      overflow:hidden;
+    }
+
+    .second-page.active{
+      top:0;
+    }
+
+    .second-page h1{
+      text-align:center;
+      color:white;
+      font-size:55px;
+      margin-top:40px;
+      letter-spacing:5px;
+      text-shadow:0 0 20px cyan;
+    }
+
+    /* Animated Ship */
+    .sea{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:250px;
+      background:linear-gradient(to top,#0077be,#00bfff);
+    }
+
+    .ship{
+      position:absolute;
+      bottom:120px;
+      left:-350px;
+      width:300px;
+      animation:moveShip 15s linear infinite;
+    }
+
+    @keyframes moveShip{
+      0%{
+        left:-350px;
+      }
+      100%{
+        left:110%;
+      }
+    }
+
+    .waves{
+      position:absolute;
+      bottom:0;
+      width:200%;
+      height:100px;
+      background:url('https://i.ibb.co/wQZVxxk/wave.png');
+      background-size:1000px 100px;
+      animation:wave 8s linear infinite;
+    }
+
+    @keyframes wave{
+      0%{
+        transform:translateX(0);
+      }
+      100%{
+        transform:translateX(-1000px);
+      }
+    }
+
+    /* Back Button */
+    .back-btn{
+      position:absolute;
+      top:30px;
+      left:30px;
+    }
+
+    .back-btn button{
+      padding:12px 25px;
+      border:none;
+      border-radius:25px;
+      background:#00bfff;
+      color:white;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- FRONT PAGE -->
+  <div class="page">
+
+    <div class="slideshow">
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><button onclick="openSecondPage()">Home</button></li>
+        <li><button>Vision</button></li>
+        <li><button>Mission</button></li>
+        <li><button>About</button></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+      <h1>NAVAL SYSTEM</h1>
+      <h2>NSR & FCS</h2>
+    </div>
+
+    <!-- Click Here -->
+    <div class="click-btn">
+      <button onclick="openSecondPage()">CLICK HERE</button>
+    </div>
+
+  </div>
+
+  <!-- SECOND PAGE -->
+  <div class="second-page" id="secondPage">
+
+    <div class="back-btn">
+      <button onclick="closeSecondPage()">← Back</button>
+    </div>
+
+    <h1>NAVAL DEFENCE SYSTEM</h1>
+
+    <!-- Moving Ship -->
+    <img 
+      class="ship"
+      src="https://pngimg.com/d/battleship_PNG35.png"
+      alt="ship"
+    >
+
+    <div class="sea">
+      <div class="waves"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const secondPage = document.getElementById("secondPage");
+
+    function openSecondPage(){
+      secondPage.classList.add("active");
+    }
+
+    function closeSecondPage(){
+      secondPage.classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>
