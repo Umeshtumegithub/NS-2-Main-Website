@@ -21,8 +21,8 @@ body {
   font-family: 'Exo 2', sans-serif;
   background: var(--bg);
   color: var(--light);
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* ── ANIMATED AURORA BACKGROUND ── */
@@ -137,7 +137,7 @@ body {
 .page {
   position: relative;
   z-index: 1;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -145,7 +145,7 @@ body {
 /* ── HEADER ── */
 header {
   text-align: center;
-  padding: 50px 20px 36px;
+  padding: 22px 20px 16px;
   position: relative;
 }
 
@@ -193,27 +193,35 @@ header p {
 /* ── CONTAINER ── */
 .container {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 0 24px 16px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── GRID ── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 16px;
+  flex: 1;
 }
 
 /* ── CARD ── */
 .card {
   position: relative;
   border-radius: 20px;
-  padding: 38px 22px 34px;
+  padding: 0;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   background: rgba(10, 20, 40, 0.55);
   border: 1px solid rgba(255,255,255,0.08);
@@ -243,6 +251,11 @@ header p {
 .card:nth-child(9)  { animation-delay: 0.45s; }
 .card:nth-child(10) { animation-delay: 0.50s; }
 .card:nth-child(11) { animation-delay: 0.55s; }
+.card:nth-child(12) { animation-delay: 0.60s; }
+.card:nth-child(13) { animation-delay: 0.65s; }
+.card:nth-child(14) { animation-delay: 0.70s; }
+.card:nth-child(15) { animation-delay: 0.75s; }
+.card:nth-child(16) { animation-delay: 0.80s; }
 
 /* individual card accent colors */
 .card:nth-child(1)  { --c1: #f5b942; --c2: #f97316; }
@@ -256,6 +269,11 @@ header p {
 .card:nth-child(9)  { --c1: #38bdf8; --c2: #0369a1; }
 .card:nth-child(10) { --c1: #e879f9; --c2: #9333ea; }
 .card:nth-child(11) { --c1: #fb923c; --c2: #c2410c; }
+.card:nth-child(12) { --c1: #2dd4bf; --c2: #0f766e; }
+.card:nth-child(13) { --c1: #facc15; --c2: #ca8a04; }
+.card:nth-child(14) { --c1: #60a5fa; --c2: #1d4ed8; }
+.card:nth-child(15) { --c1: #f9a8d4; --c2: #db2777; }
+.card:nth-child(16) { --c1: #86efac; --c2: #16a34a; }
 
 /* glow blob inside card */
 .card::before {
@@ -332,21 +350,7 @@ header p {
   letter-spacing: 2.5px;
 }
 
-/* arrow indicator */
-.card-arrow {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 0.78rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  transition: color 0.3s ease, transform 0.3s ease;
-}
 
-.card:hover .card-arrow {
-  color: var(--c1);
-  transform: translateX(4px);
-}
 
 /* ── FOOTER ── */
 footer {
@@ -361,13 +365,17 @@ footer {
 }
 
 /* ── MOBILE ── */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .card h2 { font-size: 1rem; }
+  .card-icon { font-size: 1.6rem; }
+}
 @media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-  .card { padding: 28px 14px 24px; }
-  .card h2 { font-size: 1.35rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(8, 1fr); gap: 10px; }
+  .card h2 { font-size: 1.1rem; }
 }
 @media (max-width: 380px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -399,67 +407,81 @@ footer {
       <a class="card" href="IED.html">
         <span class="card-icon">⚙️</span>
         <h2>IED</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="Assembly.html">
         <span class="card-icon">🔧</span>
         <h2>Assembly</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="HR.html">
         <span class="card-icon">👥</span>
         <h2>HR</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="ROP.html">
         <span class="card-icon">📋</span>
         <h2>ROP</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="DE.html">
         <span class="card-icon">🔬</span>
         <h2>D&amp;E</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="CapitalBudget.html">
         <span class="card-icon">💰</span>
         <h2>Capital Budget</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="Awards.html">
         <span class="card-icon">🏆</span>
         <h2>Awards</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="ShopImprovement.html">
         <span class="card-icon">🏭</span>
         <h2>Shop Improvement</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="Testing.html">
         <span class="card-icon">🧪</span>
         <h2>Testing</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="Fabrication.html">
         <span class="card-icon">🏗️</span>
         <h2>Fabrication</h2>
-        <span class="card-arrow">Enter →</span>
       </a>
 
       <a class="card" href="OfficialLanguage.html">
         <span class="card-icon">🌐</span>
         <h2>Official Language</h2>
-        <span class="card-arrow">Enter →</span>
+      </a>
+
+      <a class="card" href="SBUProductPortfolio.html">
+        <span class="card-icon">📦</span>
+        <h2>SBU Product Portfolio</h2>
+      </a>
+
+      <a class="card" href="QMS.html">
+        <span class="card-icon">📊</span>
+        <h2>QMS</h2>
+      </a>
+
+      <a class="card" href="QA.html">
+        <span class="card-icon">✅</span>
+        <h2>QA</h2>
+      </a>
+
+      <a class="card" href="QCC.html">
+        <span class="card-icon">🔍</span>
+        <h2>QCC</h2>
+      </a>
+
+      <a class="card" href="CommunicationMeet.html">
+        <span class="card-icon">🗣️</span>
+        <h2>Communication Meet</h2>
       </a>
 
     </div>
@@ -487,4 +509,5 @@ for (let i = 0; i < 120; i++) {
 }
 </script>
 </body>
-</html> 
+  </html>
+  
