@@ -3,239 +3,488 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NS-2 Department Portal</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-:root{
-    --bg:#081221;
-    --card:#10233d;
-    --accent:#f5b942;
-    --light:#f4f7fb;
-    --blue:#1e88e5;
+:root {
+  --bg: #060d1a;
+  --accent: #f5b942;
+  --accent2: #e05c5c;
+  --accent3: #42c8f5;
+  --light: #f0f4fb;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Exo 2', sans-serif;
+  background: var(--bg);
+  color: var(--light);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-body{
-    font-family:'Exo 2',sans-serif;
-    background:linear-gradient(135deg,#081221,#10233d);
-    color:var(--light);
-    min-height:100vh;
+/* ── ANIMATED AURORA BACKGROUND ── */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: #060d1a;
+  overflow: hidden;
 }
 
-/* HEADER */
-
-header{
-    text-align:center;
-    padding:40px 20px;
-    border-bottom:2px solid var(--accent);
-    background:rgba(0,0,0,0.25);
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  animation: drift linear infinite;
+}
+.aurora:nth-child(1) {
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, #1e3a8a, transparent 70%);
+  top: -150px; left: -200px;
+  animation-duration: 18s;
+  animation-name: drift1;
+}
+.aurora:nth-child(2) {
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, #7c3aed 0%, transparent 70%);
+  top: 30%; right: -250px;
+  animation-duration: 22s;
+  animation-name: drift2;
+}
+.aurora:nth-child(3) {
+  width: 500px; height: 400px;
+  background: radial-gradient(ellipse, #0f766e, transparent 70%);
+  bottom: -100px; left: 30%;
+  animation-duration: 26s;
+  animation-name: drift3;
+}
+.aurora:nth-child(4) {
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, #b45309, transparent 70%);
+  top: 50%; left: -150px;
+  animation-duration: 20s;
+  animation-name: drift4;
+}
+.aurora:nth-child(5) {
+  width: 550px; height: 350px;
+  background: radial-gradient(ellipse, #be185d, transparent 70%);
+  bottom: 10%; right: 5%;
+  animation-duration: 24s;
+  animation-name: drift5;
 }
 
-header h1{
-    font-size:3rem;
-    color:var(--accent);
-    letter-spacing:3px;
-    font-family:'Rajdhani',sans-serif;
+@keyframes drift1 {
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(120px,80px) scale(1.15); }
+  66%  { transform: translate(60px,160px) scale(0.9); }
+  100% { transform: translate(0,0) scale(1); }
+}
+@keyframes drift2 {
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(-100px,120px) scale(1.2); }
+  100% { transform: translate(0,0) scale(1); }
+}
+@keyframes drift3 {
+  0%   { transform: translate(0,0) scale(1); }
+  40%  { transform: translate(-80px,-100px) scale(1.1); }
+  80%  { transform: translate(60px,-50px) scale(0.95); }
+  100% { transform: translate(0,0) scale(1); }
+}
+@keyframes drift4 {
+  0%   { transform: translate(0,0) scale(1); }
+  50%  { transform: translate(80px,-120px) scale(1.3); }
+  100% { transform: translate(0,0) scale(1); }
+}
+@keyframes drift5 {
+  0%   { transform: translate(0,0) scale(1); }
+  35%  { transform: translate(-90px,-60px) scale(1.15); }
+  70%  { transform: translate(-40px,80px) scale(0.9); }
+  100% { transform: translate(0,0) scale(1); }
 }
 
-header p{
-    margin-top:10px;
-    color:#d3d9e4;
-    font-size:1rem;
+/* ── STAR PARTICLES ── */
+.stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.4); }
 }
 
-/* MAIN CONTAINER */
-
-.container{
-    max-width:1200px;
-    margin:40px auto;
-    padding:20px;
+/* ── GRID OVERLAY ── */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
-/* GRID */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:25px;
+/* ── LAYOUT ── */
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* CARD */
-
-.card{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:18px;
-    padding:30px 20px;
-    text-align:center;
-    transition:0.3s ease;
-    box-shadow:0 8px 25px rgba(0,0,0,0.35);
+/* ── HEADER ── */
+header {
+  text-align: center;
+  padding: 50px 20px 36px;
+  position: relative;
 }
 
-.card:hover{
-    transform:translateY(-8px);
-    border-color:var(--accent);
+.header-line {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 0 auto 28px;
 }
 
-/* CARD TITLE */
-
-.card h2{
-    font-family:'Rajdhani',sans-serif;
-    color:var(--accent);
-    margin-bottom:18px;
-    font-size:1.8rem;
+header h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 5px;
+  background: linear-gradient(135deg, #f5b942 0%, #fde68a 50%, #f5b942 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+  background-size: 200% 100%;
 }
 
-/* BUTTON */
-
-.card a{
-    display:inline-block;
-    text-decoration:none;
-    background:var(--blue);
-    color:white;
-    padding:12px 22px;
-    border-radius:10px;
-    font-weight:600;
-    transition:0.3s ease;
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-.card a:hover{
-    background:var(--accent);
-    color:#000;
+header p {
+  margin-top: 10px;
+  color: rgba(180,200,230,0.7);
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-/* FOOTER */
-
-footer{
-    margin-top:40px;
-    text-align:center;
-    padding:20px;
-    border-top:1px solid rgba(255,255,255,0.15);
-    color:#c9d3df;
+.header-bottom-line {
+  width: 100%;
+  max-width: 700px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,185,66,0.5), transparent);
+  margin: 28px auto 0;
 }
 
-/* MOBILE RESPONSIVE */
-
-@media(max-width:768px){
-
-    header h1{
-        font-size:2.2rem;
-    }
-
+/* ── CONTAINER ── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  flex: 1;
 }
 
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+/* ── CARD ── */
+.card {
+  position: relative;
+  border-radius: 20px;
+  padding: 38px 22px 34px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+  background: rgba(10, 20, 40, 0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: transform 0.35s cubic-bezier(.23,1.1,.68,1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+  animation: cardIn 0.6s cubic-bezier(.23,1.1,.68,1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* stagger delays */
+.card:nth-child(1)  { animation-delay: 0.05s; }
+.card:nth-child(2)  { animation-delay: 0.10s; }
+.card:nth-child(3)  { animation-delay: 0.15s; }
+.card:nth-child(4)  { animation-delay: 0.20s; }
+.card:nth-child(5)  { animation-delay: 0.25s; }
+.card:nth-child(6)  { animation-delay: 0.30s; }
+.card:nth-child(7)  { animation-delay: 0.35s; }
+.card:nth-child(8)  { animation-delay: 0.40s; }
+.card:nth-child(9)  { animation-delay: 0.45s; }
+.card:nth-child(10) { animation-delay: 0.50s; }
+.card:nth-child(11) { animation-delay: 0.55s; }
+
+/* individual card accent colors */
+.card:nth-child(1)  { --c1: #f5b942; --c2: #f97316; }
+.card:nth-child(2)  { --c1: #42c8f5; --c2: #818cf8; }
+.card:nth-child(3)  { --c1: #34d399; --c2: #059669; }
+.card:nth-child(4)  { --c1: #f472b6; --c2: #be185d; }
+.card:nth-child(5)  { --c1: #a78bfa; --c2: #6d28d9; }
+.card:nth-child(6)  { --c1: #fbbf24; --c2: #b45309; }
+.card:nth-child(7)  { --c1: #f87171; --c2: #dc2626; }
+.card:nth-child(8)  { --c1: #4ade80; --c2: #15803d; }
+.card:nth-child(9)  { --c1: #38bdf8; --c2: #0369a1; }
+.card:nth-child(10) { --c1: #e879f9; --c2: #9333ea; }
+.card:nth-child(11) { --c1: #fb923c; --c2: #c2410c; }
+
+/* glow blob inside card */
+.card::before {
+  content: '';
+  position: absolute;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, var(--c1), transparent 70%);
+  border-radius: 50%;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.18;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+/* top accent border line */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c1), var(--c2), transparent);
+  border-radius: 0 0 4px 4px;
+  opacity: 0.6;
+  transition: opacity 0.35s, left 0.35s, right 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.5),
+    0 0 30px color-mix(in srgb, var(--c1) 30%, transparent);
+}
+
+.card:hover::before {
+  opacity: 0.42;
+  transform: translateX(-50%) scale(1.3);
+}
+
+.card:hover::after {
+  opacity: 1;
+  left: 0%; right: 0%;
+}
+
+/* icon wrapper */
+.card-icon {
+  font-size: 2.4rem;
+  margin-bottom: 14px;
+  display: block;
+  filter: drop-shadow(0 0 8px var(--c1));
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+/* title */
+.card h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  transition: letter-spacing 0.3s ease;
+}
+
+.card:hover h2 {
+  letter-spacing: 2.5px;
+}
+
+/* arrow indicator */
+.card-arrow {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-arrow {
+  color: var(--c1);
+  transform: translateX(4px);
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 22px 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  color: rgba(180,200,230,0.4);
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card { padding: 28px 14px 24px; }
+  .card h2 { font-size: 1.35rem; }
+}
+@media (max-width: 380px) {
+  .grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
-
 <body>
 
-<header>
+<!-- ANIMATED BACKGROUND -->
+<div class="bg-canvas">
+  <div class="aurora"></div>
+  <div class="aurora"></div>
+  <div class="aurora"></div>
+  <div class="aurora"></div>
+  <div class="aurora"></div>
+  <div class="stars" id="stars"></div>
+  <div class="grid-overlay"></div>
+</div>
 
+<div class="page">
+
+  <header>
+    <div class="header-line"></div>
     <h1>NS-2 Department Portal</h1>
-
     <p>Department Navigation Dashboard</p>
+    <div class="header-bottom-line"></div>
+  </header>
 
-</header>
-
-<div class="container">
-
+  <div class="container">
     <div class="grid">
 
-        <!-- IED -->
+      <a class="card" href="IED.html">
+        <span class="card-icon">⚙️</span>
+        <h2>IED</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <div class="card">
-            <h2>IED</h2>
-            <a href="IED.html">Open</a>
-        </div>
+      <a class="card" href="Assembly.html">
+        <span class="card-icon">🔧</span>
+        <h2>Assembly</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <!-- Assembly -->
+      <a class="card" href="HR.html">
+        <span class="card-icon">👥</span>
+        <h2>HR</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <div class="card">
-            <h2>Assembly</h2>
-            <a href="Assembly.html">Open</a>
-        </div>
+      <a class="card" href="ROP.html">
+        <span class="card-icon">📋</span>
+        <h2>ROP</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <!-- HR -->
+      <a class="card" href="DE.html">
+        <span class="card-icon">🔬</span>
+        <h2>D&amp;E</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <div class="card">
-            <h2>HR</h2>
-            <a href="HR.html">Open</a>
-        </div>
+      <a class="card" href="CapitalBudget.html">
+        <span class="card-icon">💰</span>
+        <h2>Capital Budget</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <!-- ROP -->
+      <a class="card" href="Awards.html">
+        <span class="card-icon">🏆</span>
+        <h2>Awards</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <div class="card">
-            <h2>ROP</h2>
-            <a href="ROP.html">Open</a>
-        </div>
+      <a class="card" href="ShopImprovement.html">
+        <span class="card-icon">🏭</span>
+        <h2>Shop Improvement</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <!-- D&E -->
+      <a class="card" href="Testing.html">
+        <span class="card-icon">🧪</span>
+        <h2>Testing</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <div class="card">
-            <h2>D&E</h2>
-            <a href="DE.html">Open</a>
-        </div>
+      <a class="card" href="Fabrication.html">
+        <span class="card-icon">🏗️</span>
+        <h2>Fabrication</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
-        <!-- Capital Budget -->
-
-        <div class="card">
-            <h2>Capital Budget</h2>
-            <a href="CapitalBudget.html">Open</a>
-        </div>
-
-        <!-- Awards -->
-
-        <div class="card">
-            <h2>Awards</h2>
-            <a href="Awards.html">Open</a>
-        </div>
-
-        <!-- Shop Improvement -->
-
-        <div class="card">
-            <h2>Shop Improvement</h2>
-            <a href="ShopImprovement.html">Open</a>
-        </div>
-
-        <!-- Testing -->
-
-        <div class="card">
-            <h2>Testing</h2>
-            <a href="Testing.html">Open</a>
-        </div>
-
-        <!-- Fabrication -->
-
-        <div class="card">
-            <h2>Fabrication</h2>
-            <a href="Fabrication.html">Open</a>
-        </div>
-
-        <!-- Official Language -->
-
-        <div class="card">
-            <h2>Official Language</h2>
-            <a href="OfficialLanguage.html">Open</a>
-        </div>
+      <a class="card" href="OfficialLanguage.html">
+        <span class="card-icon">🌐</span>
+        <h2>Official Language</h2>
+        <span class="card-arrow">Enter →</span>
+      </a>
 
     </div>
+  </div>
+
+  <footer>© 2026 NS-2 Department Website</footer>
 
 </div>
 
-<footer>
-
-    © 2026 NS-2 Department Website
-
-</footer>
-
+<script>
+// Generate twinkling stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    top:${Math.random()*100}%;
+    left:${Math.random()*100}%;
+    animation-duration:${2 + Math.random()*4}s;
+    animation-delay:${Math.random()*5}s;
+  `;
+  starsEl.appendChild(s);
+}
+</script>
 </body>
-</html>
+</html> 
