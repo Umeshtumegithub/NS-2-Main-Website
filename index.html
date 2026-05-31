@@ -3,188 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NS-2 Department Portal</title>
+<title>NS(R&FCS) Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #060d1a;
-  --accent: #f5b942;
+  /* NEW high-tech deep space color palette */
+  --bg-dark: #030712;
+  --bg-gradient: radial-gradient(circle at 10% 20%, rgba(4, 15, 36, 1) 0%, rgba(9, 3, 22, 1) 45%, rgba(2, 8, 16, 1) 90%);
+  --accent: #00f2fe;
   --light: #f0f4fb;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Exo 2', sans-serif;
-  background: var(--bg);
+  background: var(--bg-dark);
+  background-image: var(--bg-gradient);
   color: var(--light);
   height: 100vh;
   overflow: hidden;
+  perspective: 1000px;
 }
 
-/* ── AURORA BACKGROUND ── */
+/* ── HIGH-TECH COSMIC BACKGROUND ── */
 .bg-canvas {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: #060d1a;
   overflow: hidden;
 }
 .aurora {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.35;
+  filter: blur(100px);
+  opacity: 0.25;
+  mix-blend-mode: screen;
 }
-.aurora:nth-child(1) { width:700px;height:500px;background:radial-gradient(ellipse,#1e3a8a,transparent 70%);top:-150px;left:-200px;animation:drift1 18s linear infinite; }
-.aurora:nth-child(2) { width:600px;height:600px;background:radial-gradient(ellipse,#7c3aed,transparent 70%);top:30%;right:-250px;animation:drift2 22s linear infinite; }
-.aurora:nth-child(3) { width:500px;height:400px;background:radial-gradient(ellipse,#0f766e,transparent 70%);bottom:-100px;left:30%;animation:drift3 26s linear infinite; }
-.aurora:nth-child(4) { width:400px;height:400px;background:radial-gradient(ellipse,#b45309,transparent 70%);top:50%;left:-150px;animation:drift4 20s linear infinite; }
-.aurora:nth-child(5) { width:550px;height:350px;background:radial-gradient(ellipse,#be185d,transparent 70%);bottom:10%;right:5%;animation:drift5 24s linear infinite; }
-@keyframes drift1 { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(120px,80px) scale(1.15)} 66%{transform:translate(60px,160px) scale(0.9)} 100%{transform:translate(0,0) scale(1)} }
-@keyframes drift2 { 0%{transform:translate(0,0) scale(1)} 50%{transform:translate(-100px,120px) scale(1.2)} 100%{transform:translate(0,0) scale(1)} }
-@keyframes drift3 { 0%{transform:translate(0,0) scale(1)} 40%{transform:translate(-80px,-100px) scale(1.1)} 80%{transform:translate(60px,-50px) scale(0.95)} 100%{transform:translate(0,0) scale(1)} }
-@keyframes drift4 { 0%{transform:translate(0,0) scale(1)} 50%{transform:translate(80px,-120px) scale(1.3)} 100%{transform:translate(0,0) scale(1)} }
-@keyframes drift5 { 0%{transform:translate(0,0) scale(1)} 35%{transform:translate(-90px,-60px) scale(1.15)} 70%{transform:translate(-40px,80px) scale(0.9)} 100%{transform:translate(0,0) scale(1)} }
+.aurora:nth-child(1) { width:800px;height:600px;background:radial-gradient(circle, #00f2fe, transparent 70%);top:-200px;left:-100px;animation:drift1 22s ease-in-out infinite alternate; }
+.aurora:nth-child(2) { width:700px;height:700px;background:radial-gradient(circle, #9d4edd, transparent 70%);top:20%;right:-300px;animation:drift2 28s ease-in-out infinite alternate; }
+.aurora:nth-child(3) { width:600px;height:500px;background:radial-gradient(circle, #059669, transparent 70%);bottom:-150px;left:25%;animation:drift3 32s ease-in-out infinite alternate; }
+.aurora:nth-child(4) { width:500px;height:500px;background:radial-gradient(circle, #db2777, transparent 70%);top:40%;left:-200px;animation:drift1 25s ease-in-out infinite; }
+
+@keyframes drift1 { 0%{transform:translate(0,0) rotate(0deg) scale(1)} 100%{transform:translate(150px,100px) rotate(180deg) scale(1.2)} }
+@keyframes drift2 { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(-120px,150px) scale(0.85)} }
+@keyframes drift3 { 0%{transform:translate(0,0) scale(0.9)} 100%{transform:translate(100px,-80px) scale(1.15)} }
 
 /* ── STARS ── */
 .stars { position:absolute;inset:0;overflow:hidden; }
 .star { position:absolute;background:white;border-radius:50%;animation:twinkle ease-in-out infinite; }
-@keyframes twinkle { 0%,100%{opacity:0.15;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.4)} }
+@keyframes twinkle { 0%,100%{opacity:0.1;transform:scale(0.8)} 50%{opacity:1;transform:scale(1.5)} }
 
-/* ── GRID OVERLAY ── */
+/* ── MATRIX-STYLE GRID SCANNER ── */
 .grid-overlay {
   position:absolute;inset:0;
-  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
-  background-size:60px 60px;
+  background-image: linear-gradient(rgba(0, 242, 254, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 254, 0.015) 1px, transparent 1px);
+  background-size:50px 50px;
 }
+.grid-overlay::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: 0; right: 0; height: 15%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 242, 254, 0.04), transparent);
+  animation: scanline 8s linear infinite;
+}
+@keyframes scanline { 0% { top: -50%; } 100% { top: 150%; } }
 
 /* ── LAYOUT ── */
 .page { position:relative;z-index:1;height:100vh;display:flex;flex-direction:column; }
 
-/* ── HEADER ── */
-header { text-align:center;padding:22px 20px 16px; }
-.header-line { width:80px;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:0 auto 22px; }
+/* ── HEADER INTERACTIVE EFFECTS ── */
+header { text-align:center;padding:25px 20px 15px; animation: dropDown 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.header-line { width:120px;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:0 auto 15px; }
 header h1 {
   font-family:'Rajdhani',sans-serif;
-  font-size:clamp(2rem,5vw,3.4rem);
-  font-weight:700;letter-spacing:5px;
-  background:linear-gradient(135deg,#f5b942 0%,#fde68a 50%,#f5b942 100%);
+  font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:700;letter-spacing:8px;
+  background:linear-gradient(135deg,#00f2fe 0%,#9d4edd 50%,#00f2fe 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:shimmer 4s ease-in-out infinite;background-size:200% 100%;
+  animation:shimmer 6s linear infinite;background-size:200% 100%;
 }
-@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-header p { margin-top:8px;color:rgba(180,200,230,0.7);font-size:0.88rem;letter-spacing:3px;text-transform:uppercase; }
-.header-bottom-line { width:100%;max-width:700px;height:1px;background:linear-gradient(90deg,transparent,rgba(245,185,66,0.5),transparent);margin:20px auto 0; }
+@keyframes shimmer { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+header p { margin-top:8px;color:rgba(0, 242, 254, 0.6);font-size:0.85rem;letter-spacing:5px;text-transform:uppercase; }
+.header-bottom-line { width:100%;max-width:800px;height:1px;background:linear-gradient(90deg,transparent,rgba(0, 242, 254, 0.3),transparent);margin:15px auto 0; }
+
+@keyframes dropDown { from{opacity:0;transform:translateY(-30px);filter:blur(5px);} to{opacity:1;transform:translateY(0);filter:blur(0);} }
 
 /* ── CONTAINER ── */
-.container { max-width:1280px;width:100%;margin:0 auto;padding:0 24px 16px;flex:1;display:flex;flex-direction:column; }
+.container { max-width:1340px;width:100%;margin:0 auto;padding:10px 24px 20px;flex:1;display:flex;flex-direction:column; }
 
-/* ── GRID ── */
-.grid { display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:14px;flex:1; }
+/* ── PERSPECTIVE GRID CONTAINER ── */
+.grid { 
+  display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:16px;flex:1; 
+  animation: gridIntro 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes gridIntro { from{opacity:0;transform:rotateX(15deg) translateY(50px);} to{opacity:1;transform:rotateX(0deg) translateY(0);} }
 
-/* ── CARDS ── */
+/* ── REVOLUTIONIZED ANIMATED CARDS ── */
 .card {
-  position:relative;border-radius:16px;text-align:center;cursor:pointer;text-decoration:none;
+  position:relative;border-radius:12px;text-align:center;cursor:pointer;text-decoration:none;
   display:flex;align-items:center;justify-content:center;overflow:hidden;
-  border:1px solid rgba(255,255,255,0.10);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  transition:transform 0.35s cubic-bezier(.23,1.1,.68,1),box-shadow 0.35s ease,border-color 0.35s ease;
-  animation:cardIn 0.6s cubic-bezier(.23,1.1,.68,1) both;
+  border:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+  animation:cardIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-@keyframes cardIn { from{opacity:0;transform:translateY(28px) scale(0.94)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes cardIn { from{opacity:0;transform:translateY(40px) scale(0.9);filter:blur(5px);} to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);} }
 
-/* ---- CARD COLORS: background + glow vars (no color-mix) ---- */
-.card:nth-child(1)  { --c1:#f5b942;--c2:#f97316;--glow:rgba(245,185,66,0.30); background:linear-gradient(135deg,rgba(245,185,66,0.18),rgba(249,115,22,0.10)); }
-.card:nth-child(2)  { --c1:#42c8f5;--c2:#818cf8;--glow:rgba(66,200,245,0.30);  background:linear-gradient(135deg,rgba(66,200,245,0.18),rgba(129,140,248,0.10)); }
-.card:nth-child(3)  { --c1:#34d399;--c2:#059669;--glow:rgba(52,211,153,0.30);  background:linear-gradient(135deg,rgba(52,211,153,0.18),rgba(5,150,105,0.10)); }
-.card:nth-child(4)  { --c1:#f472b6;--c2:#be185d;--glow:rgba(244,114,182,0.30); background:linear-gradient(135deg,rgba(244,114,182,0.18),rgba(190,24,93,0.10)); }
-.card:nth-child(5)  { --c1:#a78bfa;--c2:#6d28d9;--glow:rgba(167,139,250,0.30); background:linear-gradient(135deg,rgba(167,139,250,0.18),rgba(109,40,217,0.10)); }
-.card:nth-child(6)  { --c1:#fbbf24;--c2:#b45309;--glow:rgba(251,191,36,0.30);  background:linear-gradient(135deg,rgba(251,191,36,0.18),rgba(180,83,9,0.10)); }
-.card:nth-child(7)  { --c1:#f87171;--c2:#dc2626;--glow:rgba(248,113,113,0.30); background:linear-gradient(135deg,rgba(248,113,113,0.18),rgba(220,38,38,0.10)); }
-.card:nth-child(8)  { --c1:#4ade80;--c2:#15803d;--glow:rgba(74,222,128,0.30);  background:linear-gradient(135deg,rgba(74,222,128,0.18),rgba(21,128,61,0.10)); }
-.card:nth-child(9)  { --c1:#38bdf8;--c2:#0369a1;--glow:rgba(56,189,248,0.30);  background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(3,105,161,0.10)); }
-.card:nth-child(10) { --c1:#e879f9;--c2:#9333ea;--glow:rgba(232,121,249,0.30); background:linear-gradient(135deg,rgba(232,121,249,0.18),rgba(147,51,234,0.10)); }
-.card:nth-child(11) { --c1:#fb923c;--c2:#c2410c;--glow:rgba(251,146,60,0.30);  background:linear-gradient(135deg,rgba(251,146,60,0.18),rgba(194,65,12,0.10)); }
-.card:nth-child(12) { --c1:#2dd4bf;--c2:#0f766e;--glow:rgba(45,212,191,0.30);  background:linear-gradient(135deg,rgba(45,212,191,0.18),rgba(15,118,110,0.10)); }
-.card:nth-child(13) { --c1:#facc15;--c2:#ca8a04;--glow:rgba(250,204,21,0.30);  background:linear-gradient(135deg,rgba(250,204,21,0.18),rgba(202,138,4,0.10)); }
-.card:nth-child(14) { --c1:#60a5fa;--c2:#1d4ed8;--glow:rgba(96,165,250,0.30);  background:linear-gradient(135deg,rgba(96,165,250,0.18),rgba(29,78,216,0.10)); }
-.card:nth-child(15) { --c1:#f9a8d4;--c2:#db2777;--glow:rgba(249,168,212,0.30); background:linear-gradient(135deg,rgba(249,168,212,0.18),rgba(219,39,119,0.10)); }
-.card:nth-child(16) { --c1:#86efac;--c2:#16a34a;--glow:rgba(134,239,172,0.30); background:linear-gradient(135deg,rgba(134,239,172,0.18),rgba(22,163,74,0.10)); }
+/* ---- BRANDED NEON COLOR LOGIC ---- */
+.card:nth-child(1)  { --c1:#00f2fe;--glow:rgba(0,242,254,0.25); background:rgba(0, 242, 254, 0.03); }
+.card:nth-child(2)  { --c1:#9d4edd;--glow:rgba(157,78,221,0.25); background:rgba(157, 78, 221, 0.03); }
+.card:nth-child(3)  { --c1:#34d399;--glow:rgba(52,211,153,0.25); background:rgba(52, 211, 153, 0.03); }
+.card:nth-child(4)  { --c1:#ff477e;--glow:rgba(255,71,126,0.25); background:rgba(255, 71, 126, 0.03); }
+.card:nth-child(5)  { --c1:#f72585;--glow:rgba(247,37,133,0.25); background:rgba(247, 37, 133, 0.03); }
+.card:nth-child(6)  { --c1:#f4a261;--glow:rgba(244,162,97,0.25); background:rgba(244, 162, 97, 0.03); }
+.card:nth-child(7)  { --c1:#ee242c;--glow:rgba(238,36,44,0.25); background:rgba(238, 36, 44, 0.03); }
+.card:nth-child(8)  { --c1:#06d6a0;--glow:rgba(6,214,160,0.25); background:rgba(6, 214, 160, 0.03); }
+.card:nth-child(9)  { --c1:#3a86ff;--glow:rgba(58,134,255,0.25); background:rgba(58, 134, 255, 0.03); }
+.card:nth-child(10) { --c1:#ff006e;--glow:rgba(255,0,110,0.25); background:rgba(255, 0, 110, 0.03); }
+.card:nth-child(11) { --c1:#f1c40f;--glow:rgba(241,196,15,0.25); background:rgba(241, 196, 15, 0.03); }
+.card:nth-child(12) { --c1:#00b4d8;--glow:rgba(0,180,216,0.25); background:rgba(0, 180, 216, 0.03); }
+.card:nth-child(13) { --c1:#e67e22;--glow:rgba(230,126,34,0.25); background:rgba(230, 126, 34, 0.03); }
+.card:nth-child(14) { --c1:#7209b7;--glow:rgba(114,9,183,0.25); background:rgba(114, 9, 183, 0.03); }
+.card:nth-child(15) { --c1:#ff70a6;--glow:rgba(255,112,166,0.25); background:rgba(255, 112, 166, 0.03); }
+.card:nth-child(16) { --c1:#2ecc71;--glow:rgba(46,204,113,0.25); background:rgba(46, 204, 113, 0.03); }
 
-/* Stagger animation delays */
-.card:nth-child(1){animation-delay:0.04s} .card:nth-child(2){animation-delay:0.08s}
-.card:nth-child(3){animation-delay:0.12s} .card:nth-child(4){animation-delay:0.16s}
-.card:nth-child(5){animation-delay:0.20s} .card:nth-child(6){animation-delay:0.24s}
-.card:nth-child(7){animation-delay:0.28s} .card:nth-child(8){animation-delay:0.32s}
-.card:nth-child(9){animation-delay:0.36s} .card:nth-child(10){animation-delay:0.40s}
-.card:nth-child(11){animation-delay:0.44s} .card:nth-child(12){animation-delay:0.48s}
-.card:nth-child(13){animation-delay:0.52s} .card:nth-child(14){animation-delay:0.56s}
-.card:nth-child(15){animation-delay:0.60s} .card:nth-child(16){animation-delay:0.64s}
+/* Staggered load-in sequence */
+.card:nth-child(1){animation-delay:0.03s} .card:nth-child(2){animation-delay:0.06s}
+.card:nth-child(3){animation-delay:0.09s} .card:nth-child(4){animation-delay:0.12s}
+.card:nth-child(5){animation-delay:0.15s} .card:nth-child(6){animation-delay:0.18s}
+.card:nth-child(7){animation-delay:0.21s} .card:nth-child(8){animation-delay:0.24s}
+.card:nth-child(9){animation-delay:0.27s} .card:nth-child(10){animation-delay:0.30s}
+.card:nth-child(11){animation-delay:0.33s} .card:nth-child(12){animation-delay:0.36s}
+.card:nth-child(13){animation-delay:0.39s} .card:nth-child(14){animation-delay:0.42s}
+.card:nth-child(15){animation-delay:0.45s} .card:nth-child(16){animation-delay:0.48s}
 
-/* Inner glow blob */
+/* Animated geometric tech ring background on card */
 .card::before {
-  content:'';position:absolute;width:200px;height:200px;
-  background:radial-gradient(circle,var(--c1),transparent 65%);
-  border-radius:50%;top:-80px;left:50%;transform:translateX(-50%);
-  opacity:0.15;transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;
-}
-/* Shimmer sweep */
-.card::after {
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.07) 50%,transparent 60%);
-  transform:translateX(-100%);pointer-events:none;
+  content:'';position:absolute;width:110px;height:110px;
+  border: 1px dashed var(--c1);border-radius:50%;
+  opacity:0.03;transform: scale(0.6) rotate(0deg);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events:none;z-index: 0;
 }
 
+/* Glowing accent lines */
 .card .top-bar {
-  position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,var(--c1),var(--c2),transparent);
-  opacity:0.7;border-radius:16px 16px 0 0;transition:opacity 0.35s;
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--c1),transparent);
+  opacity:0.4;transition:all 0.35s ease;
 }
 .card .bottom-bar {
-  position:absolute;bottom:0;left:15%;right:15%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--c1),transparent);
-  opacity:0;transition:opacity 0.35s,left 0.35s,right 0.35s;
+  position:absolute;bottom:0;left:50%;right:50%;height:2px;
+  background:var(--c1);opacity:0;
+  transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ── HOVER ANIMATION STATES ── */
 .card:hover {
-  transform:translateY(-8px) scale(1.04);
-  border-color:rgba(255,255,255,0.22);
-  /* glow uses the pre-computed rgba var — no color-mix needed */
-  box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 35px var(--glow),inset 0 1px 0 rgba(255,255,255,0.12);
+  transform: translateY(-6px) scale(1.03) rotateX(4deg);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 25px var(--glow);
 }
-.card:hover::before { opacity:0.38;transform:translateX(-50%) scale(1.4); }
-.card:hover::after  { transform:translateX(200%);transition:transform 0.6s ease; }
-.card:hover .top-bar { opacity:1; }
-.card:hover .bottom-bar { opacity:1;left:5%;right:5%; }
+.card:hover::before {
+  opacity: 0.15;
+  transform: scale(1.2) rotate(90deg);
+}
+.card:hover .top-bar { opacity:1; background: var(--c1); }
+.card:hover .bottom-bar { opacity:1; left:10%; right:10%; }
 
-/* ── CARD TITLE ── */
+/* Micro click state animation */
+.card:active {
+  transform: translateY(-2px) scale(0.97);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.7), 0 0 10px var(--glow);
+  transition: transform 0.1s;
+}
+
+/* ── CARD LABELS ── */
 .card h2 {
   font-family:'Rajdhani',sans-serif;
-  font-size:clamp(0.95rem,1.5vw,1.55rem);
-  font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--c1) 20%,var(--c2) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  transition:letter-spacing 0.3s ease,filter 0.3s ease;
-  position:relative;z-index:1;padding:0 12px;text-align:center;line-height:1.2;
+  font-size:clamp(0.9rem,1.4vw,1.45rem);
+  font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color: #a3b3cc;
+  transition: all 0.35s ease;
+  position:relative;z-index:2;padding:0 10px;
+  transform: translateZ(20px); /* 3D layer effect */
 }
-.card:hover h2 { letter-spacing:2.5px; }
+.card:hover h2 { 
+  color: #ffffff;
+  text-shadow: 0 0 10px var(--c1);
+  letter-spacing: 2px;
+}
 
 /* ── FOOTER ── */
 footer {
-  text-align:center;padding:18px 20px;
-  border-top:1px solid rgba(255,255,255,0.06);
-  color:rgba(180,200,230,0.4);font-size:0.82rem;letter-spacing:1.5px;
+  text-align:center;padding:15px 20px;
+  border-top:1px solid rgba(255,255,255,0.03);
+  color:rgba(0, 242, 254, 0.25);font-size:0.8rem;letter-spacing:2px;
   position:relative;z-index:1;
 }
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){ .grid{grid-template-columns:repeat(4,1fr);gap:10px} .card h2{font-size:0.9rem} }
-@media(max-width:600px){ .grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(8,1fr);gap:10px} .card h2{font-size:1rem} }
+/* ── RESPONSIVE COMPACTNESS ── */
+@media(max-width:900px){ .grid{grid-template-columns:repeat(4,1fr);gap:10px} .card h2{font-size:0.85rem} }
+@media(max-width:640px){ .grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(8,1fr);gap:10px} .card h2{font-size:0.95rem} }
 </style>
 </head>
 <body>
 
 <div class="bg-canvas">
-  <div class="aurora"></div>
   <div class="aurora"></div>
   <div class="aurora"></div>
   <div class="aurora"></div>
@@ -205,120 +231,96 @@ footer {
   <div class="container">
     <div class="grid">
 
-      <!-- =====================================================
-           EDIT HYPERLINKS BELOW
-           Replace the href="..." value with your actual URL
-           Example: href="http://yoursite.com/IED.html"
-                or: href="IED.html"  (for same folder)
-                or: href="\\server\share\IED.html"  (network path)
-           ===================================================== -->
-
-      <!-- Button 1 -->
       <a class="card" href="IED.html">
         <div class="top-bar"></div>
         <h2>IED</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 2 -->
       <a class="card" href="Assembly.html">
         <div class="top-bar"></div>
         <h2>Assembly</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 3 -->
       <a class="card" href="HR.html">
         <div class="top-bar"></div>
         <h2>HR</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 4 -->
       <a class="card" href="ROP.html">
         <div class="top-bar"></div>
         <h2>ROP</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 5 -->
       <a class="card" href="DE.html">
         <div class="top-bar"></div>
         <h2>D&amp;E</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 6 -->
       <a class="card" href="CapitalBudget.html">
         <div class="top-bar"></div>
         <h2>Capital Budget</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 7 -->
       <a class="card" href="Awards.html">
         <div class="top-bar"></div>
         <h2>Awards</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 8 -->
       <a class="card" href="ShopImprovement.html">
         <div class="top-bar"></div>
         <h2>Shop Improvement</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 9 -->
       <a class="card" href="Testing.html">
         <div class="top-bar"></div>
         <h2>Testing</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 10 -->
       <a class="card" href="Fabrication.html">
         <div class="top-bar"></div>
         <h2>Fabrication</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 11 -->
       <a class="card" href="OfficialLanguage.html">
         <div class="top-bar"></div>
         <h2>Official Language</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 12 -->
       <a class="card" href="SBUProductPortfolio.html">
         <div class="top-bar"></div>
         <h2>SBU Product Portfolio</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 13 -->
       <a class="card" href="QMS.html">
         <div class="top-bar"></div>
         <h2>QMS</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 14 -->
       <a class="card" href="QA.html">
         <div class="top-bar"></div>
         <h2>QA</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 15 -->
       <a class="card" href="QCC.html">
         <div class="top-bar"></div>
         <h2>QCC</h2>
         <div class="bottom-bar"></div>
       </a>
 
-      <!-- Button 16 -->
       <a class="card" href="CommunicationMeet.html">
         <div class="top-bar"></div>
         <h2>Communication Meet</h2>
@@ -332,21 +334,31 @@ footer {
 </div>
 
 <script>
+// Generate background star matrix dynamically
 var starsEl = document.getElementById('stars');
-for (var i = 0; i < 120; i++) {
+for (var i = 0; i < 100; i++) {
   var s = document.createElement('div');
   s.className = 'star';
-  var size = Math.random() * 2.5 + 0.5;
+  var size = Math.random() * 2 + 0.5;
   s.style.cssText =
     'width:' + size + 'px;height:' + size + 'px;' +
     'top:' + (Math.random()*100) + '%;' +
     'left:' + (Math.random()*100) + '%;' +
-    'animation-duration:' + (2 + Math.random()*4) + 's;' +
-    'animation-delay:' + (Math.random()*5) + 's;';
+    'animation-duration:' + (3 + Math.random()*4) + 's;' +
+    'animation-delay:' + (Math.random()*4) + 's;';
   starsEl.appendChild(s);
 }
+
+// Optional fluid click handler to ensure structural scaling on touch/click
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', function(e) {
+    // Allows micro-animation to resolve quickly visually before browsing away
+    this.style.transform = "scale()";
+  });
+});
 </script>
 
 </body>
-  </html>
-  
+</html>
+
+```
