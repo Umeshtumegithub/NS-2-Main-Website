@@ -5,18 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NS-2 Department Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --bg: #060d1a;
   --accent: #f5b942;
-  --accent2: #e05c5c;
-  --accent3: #42c8f5;
   --light: #f0f4fb;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
   font-family: 'Exo 2', sans-serif;
   background: var(--bg);
@@ -25,7 +20,7 @@ body {
   overflow: hidden;
 }
 
-/* ── ANIMATED AURORA BACKGROUND ── */
+/* ── AURORA BACKGROUND ── */
 .bg-canvas {
   position: fixed;
   inset: 0;
@@ -33,355 +28,161 @@ body {
   background: #060d1a;
   overflow: hidden;
 }
-
 .aurora {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
   opacity: 0.35;
-  animation: drift linear infinite;
 }
-.aurora:nth-child(1) {
-  width: 700px; height: 500px;
-  background: radial-gradient(ellipse, #1e3a8a, transparent 70%);
-  top: -150px; left: -200px;
-  animation-duration: 18s;
-  animation-name: drift1;
-}
-.aurora:nth-child(2) {
-  width: 600px; height: 600px;
-  background: radial-gradient(ellipse, #7c3aed 0%, transparent 70%);
-  top: 30%; right: -250px;
-  animation-duration: 22s;
-  animation-name: drift2;
-}
-.aurora:nth-child(3) {
-  width: 500px; height: 400px;
-  background: radial-gradient(ellipse, #0f766e, transparent 70%);
-  bottom: -100px; left: 30%;
-  animation-duration: 26s;
-  animation-name: drift3;
-}
-.aurora:nth-child(4) {
-  width: 400px; height: 400px;
-  background: radial-gradient(ellipse, #b45309, transparent 70%);
-  top: 50%; left: -150px;
-  animation-duration: 20s;
-  animation-name: drift4;
-}
-.aurora:nth-child(5) {
-  width: 550px; height: 350px;
-  background: radial-gradient(ellipse, #be185d, transparent 70%);
-  bottom: 10%; right: 5%;
-  animation-duration: 24s;
-  animation-name: drift5;
-}
+.aurora:nth-child(1) { width:700px;height:500px;background:radial-gradient(ellipse,#1e3a8a,transparent 70%);top:-150px;left:-200px;animation:drift1 18s linear infinite; }
+.aurora:nth-child(2) { width:600px;height:600px;background:radial-gradient(ellipse,#7c3aed,transparent 70%);top:30%;right:-250px;animation:drift2 22s linear infinite; }
+.aurora:nth-child(3) { width:500px;height:400px;background:radial-gradient(ellipse,#0f766e,transparent 70%);bottom:-100px;left:30%;animation:drift3 26s linear infinite; }
+.aurora:nth-child(4) { width:400px;height:400px;background:radial-gradient(ellipse,#b45309,transparent 70%);top:50%;left:-150px;animation:drift4 20s linear infinite; }
+.aurora:nth-child(5) { width:550px;height:350px;background:radial-gradient(ellipse,#be185d,transparent 70%);bottom:10%;right:5%;animation:drift5 24s linear infinite; }
+@keyframes drift1 { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(120px,80px) scale(1.15)} 66%{transform:translate(60px,160px) scale(0.9)} 100%{transform:translate(0,0) scale(1)} }
+@keyframes drift2 { 0%{transform:translate(0,0) scale(1)} 50%{transform:translate(-100px,120px) scale(1.2)} 100%{transform:translate(0,0) scale(1)} }
+@keyframes drift3 { 0%{transform:translate(0,0) scale(1)} 40%{transform:translate(-80px,-100px) scale(1.1)} 80%{transform:translate(60px,-50px) scale(0.95)} 100%{transform:translate(0,0) scale(1)} }
+@keyframes drift4 { 0%{transform:translate(0,0) scale(1)} 50%{transform:translate(80px,-120px) scale(1.3)} 100%{transform:translate(0,0) scale(1)} }
+@keyframes drift5 { 0%{transform:translate(0,0) scale(1)} 35%{transform:translate(-90px,-60px) scale(1.15)} 70%{transform:translate(-40px,80px) scale(0.9)} 100%{transform:translate(0,0) scale(1)} }
 
-@keyframes drift1 {
-  0%   { transform: translate(0,0) scale(1); }
-  33%  { transform: translate(120px,80px) scale(1.15); }
-  66%  { transform: translate(60px,160px) scale(0.9); }
-  100% { transform: translate(0,0) scale(1); }
-}
-@keyframes drift2 {
-  0%   { transform: translate(0,0) scale(1); }
-  50%  { transform: translate(-100px,120px) scale(1.2); }
-  100% { transform: translate(0,0) scale(1); }
-}
-@keyframes drift3 {
-  0%   { transform: translate(0,0) scale(1); }
-  40%  { transform: translate(-80px,-100px) scale(1.1); }
-  80%  { transform: translate(60px,-50px) scale(0.95); }
-  100% { transform: translate(0,0) scale(1); }
-}
-@keyframes drift4 {
-  0%   { transform: translate(0,0) scale(1); }
-  50%  { transform: translate(80px,-120px) scale(1.3); }
-  100% { transform: translate(0,0) scale(1); }
-}
-@keyframes drift5 {
-  0%   { transform: translate(0,0) scale(1); }
-  35%  { transform: translate(-90px,-60px) scale(1.15); }
-  70%  { transform: translate(-40px,80px) scale(0.9); }
-  100% { transform: translate(0,0) scale(1); }
-}
-
-/* ── STAR PARTICLES ── */
-.stars {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-.star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle ease-in-out infinite;
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.9; transform: scale(1.4); }
-}
+/* ── STARS ── */
+.stars { position:absolute;inset:0;overflow:hidden; }
+.star { position:absolute;background:white;border-radius:50%;animation:twinkle ease-in-out infinite; }
+@keyframes twinkle { 0%,100%{opacity:0.15;transform:scale(1)} 50%{opacity:0.9;transform:scale(1.4)} }
 
 /* ── GRID OVERLAY ── */
 .grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:60px 60px;
 }
 
 /* ── LAYOUT ── */
-.page {
-  position: relative;
-  z-index: 1;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+.page { position:relative;z-index:1;height:100vh;display:flex;flex-direction:column; }
 
 /* ── HEADER ── */
-header {
-  text-align: center;
-  padding: 22px 20px 16px;
-  position: relative;
-}
-
-.header-line {
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  margin: 0 auto 28px;
-}
-
+header { text-align:center;padding:22px 20px 16px; }
+.header-line { width:80px;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:0 auto 22px; }
 header h1 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  font-weight: 700;
-  letter-spacing: 5px;
-  background: linear-gradient(135deg, #f5b942 0%, #fde68a 50%, #f5b942 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s ease-in-out infinite;
-  background-size: 200% 100%;
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(2rem,5vw,3.4rem);
+  font-weight:700;letter-spacing:5px;
+  background:linear-gradient(135deg,#f5b942 0%,#fde68a 50%,#f5b942 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 4s ease-in-out infinite;background-size:200% 100%;
 }
-
-@keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-header p {
-  margin-top: 10px;
-  color: rgba(180,200,230,0.7);
-  font-size: 0.95rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.header-bottom-line {
-  width: 100%;
-  max-width: 700px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245,185,66,0.5), transparent);
-  margin: 28px auto 0;
-}
+@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+header p { margin-top:8px;color:rgba(180,200,230,0.7);font-size:0.88rem;letter-spacing:3px;text-transform:uppercase; }
+.header-bottom-line { width:100%;max-width:700px;height:1px;background:linear-gradient(90deg,transparent,rgba(245,185,66,0.5),transparent);margin:20px auto 0; }
 
 /* ── CONTAINER ── */
-.container {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 24px 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+.container { max-width:1280px;width:100%;margin:0 auto;padding:0 24px 16px;flex:1;display:flex;flex-direction:column; }
 
 /* ── GRID ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 16px;
-  flex: 1;
-}
+.grid { display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:14px;flex:1; }
 
-/* ── CARD ── */
+/* ── CARDS ── */
 .card {
-  position: relative;
-  border-radius: 20px;
-  padding: 0;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: rgba(10, 20, 40, 0.55);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  transition: transform 0.35s cubic-bezier(.23,1.1,.68,1),
-              box-shadow 0.35s ease,
-              border-color 0.35s ease;
-  animation: cardIn 0.6s cubic-bezier(.23,1.1,.68,1) both;
+  position:relative;border-radius:16px;text-align:center;cursor:pointer;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.10);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  transition:transform 0.35s cubic-bezier(.23,1.1,.68,1),box-shadow 0.35s ease,border-color 0.35s ease;
+  animation:cardIn 0.6s cubic-bezier(.23,1.1,.68,1) both;
 }
+@keyframes cardIn { from{opacity:0;transform:translateY(28px) scale(0.94)} to{opacity:1;transform:translateY(0) scale(1)} }
 
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
+/* ---- CARD COLORS: background + glow vars (no color-mix) ---- */
+.card:nth-child(1)  { --c1:#f5b942;--c2:#f97316;--glow:rgba(245,185,66,0.30); background:linear-gradient(135deg,rgba(245,185,66,0.18),rgba(249,115,22,0.10)); }
+.card:nth-child(2)  { --c1:#42c8f5;--c2:#818cf8;--glow:rgba(66,200,245,0.30);  background:linear-gradient(135deg,rgba(66,200,245,0.18),rgba(129,140,248,0.10)); }
+.card:nth-child(3)  { --c1:#34d399;--c2:#059669;--glow:rgba(52,211,153,0.30);  background:linear-gradient(135deg,rgba(52,211,153,0.18),rgba(5,150,105,0.10)); }
+.card:nth-child(4)  { --c1:#f472b6;--c2:#be185d;--glow:rgba(244,114,182,0.30); background:linear-gradient(135deg,rgba(244,114,182,0.18),rgba(190,24,93,0.10)); }
+.card:nth-child(5)  { --c1:#a78bfa;--c2:#6d28d9;--glow:rgba(167,139,250,0.30); background:linear-gradient(135deg,rgba(167,139,250,0.18),rgba(109,40,217,0.10)); }
+.card:nth-child(6)  { --c1:#fbbf24;--c2:#b45309;--glow:rgba(251,191,36,0.30);  background:linear-gradient(135deg,rgba(251,191,36,0.18),rgba(180,83,9,0.10)); }
+.card:nth-child(7)  { --c1:#f87171;--c2:#dc2626;--glow:rgba(248,113,113,0.30); background:linear-gradient(135deg,rgba(248,113,113,0.18),rgba(220,38,38,0.10)); }
+.card:nth-child(8)  { --c1:#4ade80;--c2:#15803d;--glow:rgba(74,222,128,0.30);  background:linear-gradient(135deg,rgba(74,222,128,0.18),rgba(21,128,61,0.10)); }
+.card:nth-child(9)  { --c1:#38bdf8;--c2:#0369a1;--glow:rgba(56,189,248,0.30);  background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(3,105,161,0.10)); }
+.card:nth-child(10) { --c1:#e879f9;--c2:#9333ea;--glow:rgba(232,121,249,0.30); background:linear-gradient(135deg,rgba(232,121,249,0.18),rgba(147,51,234,0.10)); }
+.card:nth-child(11) { --c1:#fb923c;--c2:#c2410c;--glow:rgba(251,146,60,0.30);  background:linear-gradient(135deg,rgba(251,146,60,0.18),rgba(194,65,12,0.10)); }
+.card:nth-child(12) { --c1:#2dd4bf;--c2:#0f766e;--glow:rgba(45,212,191,0.30);  background:linear-gradient(135deg,rgba(45,212,191,0.18),rgba(15,118,110,0.10)); }
+.card:nth-child(13) { --c1:#facc15;--c2:#ca8a04;--glow:rgba(250,204,21,0.30);  background:linear-gradient(135deg,rgba(250,204,21,0.18),rgba(202,138,4,0.10)); }
+.card:nth-child(14) { --c1:#60a5fa;--c2:#1d4ed8;--glow:rgba(96,165,250,0.30);  background:linear-gradient(135deg,rgba(96,165,250,0.18),rgba(29,78,216,0.10)); }
+.card:nth-child(15) { --c1:#f9a8d4;--c2:#db2777;--glow:rgba(249,168,212,0.30); background:linear-gradient(135deg,rgba(249,168,212,0.18),rgba(219,39,119,0.10)); }
+.card:nth-child(16) { --c1:#86efac;--c2:#16a34a;--glow:rgba(134,239,172,0.30); background:linear-gradient(135deg,rgba(134,239,172,0.18),rgba(22,163,74,0.10)); }
 
-/* stagger delays */
-.card:nth-child(1)  { animation-delay: 0.05s; }
-.card:nth-child(2)  { animation-delay: 0.10s; }
-.card:nth-child(3)  { animation-delay: 0.15s; }
-.card:nth-child(4)  { animation-delay: 0.20s; }
-.card:nth-child(5)  { animation-delay: 0.25s; }
-.card:nth-child(6)  { animation-delay: 0.30s; }
-.card:nth-child(7)  { animation-delay: 0.35s; }
-.card:nth-child(8)  { animation-delay: 0.40s; }
-.card:nth-child(9)  { animation-delay: 0.45s; }
-.card:nth-child(10) { animation-delay: 0.50s; }
-.card:nth-child(11) { animation-delay: 0.55s; }
-.card:nth-child(12) { animation-delay: 0.60s; }
-.card:nth-child(13) { animation-delay: 0.65s; }
-.card:nth-child(14) { animation-delay: 0.70s; }
-.card:nth-child(15) { animation-delay: 0.75s; }
-.card:nth-child(16) { animation-delay: 0.80s; }
+/* Stagger animation delays */
+.card:nth-child(1){animation-delay:0.04s} .card:nth-child(2){animation-delay:0.08s}
+.card:nth-child(3){animation-delay:0.12s} .card:nth-child(4){animation-delay:0.16s}
+.card:nth-child(5){animation-delay:0.20s} .card:nth-child(6){animation-delay:0.24s}
+.card:nth-child(7){animation-delay:0.28s} .card:nth-child(8){animation-delay:0.32s}
+.card:nth-child(9){animation-delay:0.36s} .card:nth-child(10){animation-delay:0.40s}
+.card:nth-child(11){animation-delay:0.44s} .card:nth-child(12){animation-delay:0.48s}
+.card:nth-child(13){animation-delay:0.52s} .card:nth-child(14){animation-delay:0.56s}
+.card:nth-child(15){animation-delay:0.60s} .card:nth-child(16){animation-delay:0.64s}
 
-/* individual card accent colors */
-.card:nth-child(1)  { --c1: #f5b942; --c2: #f97316; }
-.card:nth-child(2)  { --c1: #42c8f5; --c2: #818cf8; }
-.card:nth-child(3)  { --c1: #34d399; --c2: #059669; }
-.card:nth-child(4)  { --c1: #f472b6; --c2: #be185d; }
-.card:nth-child(5)  { --c1: #a78bfa; --c2: #6d28d9; }
-.card:nth-child(6)  { --c1: #fbbf24; --c2: #b45309; }
-.card:nth-child(7)  { --c1: #f87171; --c2: #dc2626; }
-.card:nth-child(8)  { --c1: #4ade80; --c2: #15803d; }
-.card:nth-child(9)  { --c1: #38bdf8; --c2: #0369a1; }
-.card:nth-child(10) { --c1: #e879f9; --c2: #9333ea; }
-.card:nth-child(11) { --c1: #fb923c; --c2: #c2410c; }
-.card:nth-child(12) { --c1: #2dd4bf; --c2: #0f766e; }
-.card:nth-child(13) { --c1: #facc15; --c2: #ca8a04; }
-.card:nth-child(14) { --c1: #60a5fa; --c2: #1d4ed8; }
-.card:nth-child(15) { --c1: #f9a8d4; --c2: #db2777; }
-.card:nth-child(16) { --c1: #86efac; --c2: #16a34a; }
-
-/* glow blob inside card */
+/* Inner glow blob */
 .card::before {
-  content: '';
-  position: absolute;
-  width: 180px; height: 180px;
-  background: radial-gradient(circle, var(--c1), transparent 70%);
-  border-radius: 50%;
-  top: -60px; left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.18;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  pointer-events: none;
+  content:'';position:absolute;width:200px;height:200px;
+  background:radial-gradient(circle,var(--c1),transparent 65%);
+  border-radius:50%;top:-80px;left:50%;transform:translateX(-50%);
+  opacity:0.15;transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;
+}
+/* Shimmer sweep */
+.card::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.07) 50%,transparent 60%);
+  transform:translateX(-100%);pointer-events:none;
 }
 
-/* top accent border line */
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 10%; right: 10%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--c1), var(--c2), transparent);
-  border-radius: 0 0 4px 4px;
-  opacity: 0.6;
-  transition: opacity 0.35s, left 0.35s, right 0.35s;
+.card .top-bar {
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--c1),var(--c2),transparent);
+  opacity:0.7;border-radius:16px 16px 0 0;transition:opacity 0.35s;
+}
+.card .bottom-bar {
+  position:absolute;bottom:0;left:15%;right:15%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--c1),transparent);
+  opacity:0;transition:opacity 0.35s,left 0.35s,right 0.35s;
 }
 
 .card:hover {
-  transform: translateY(-10px) scale(1.03);
-  border-color: rgba(255,255,255,0.18);
-  box-shadow:
-    0 20px 50px rgba(0,0,0,0.5),
-    0 0 30px color-mix(in srgb, var(--c1) 30%, transparent);
+  transform:translateY(-8px) scale(1.04);
+  border-color:rgba(255,255,255,0.22);
+  /* glow uses the pre-computed rgba var — no color-mix needed */
+  box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 35px var(--glow),inset 0 1px 0 rgba(255,255,255,0.12);
 }
+.card:hover::before { opacity:0.38;transform:translateX(-50%) scale(1.4); }
+.card:hover::after  { transform:translateX(200%);transition:transform 0.6s ease; }
+.card:hover .top-bar { opacity:1; }
+.card:hover .bottom-bar { opacity:1;left:5%;right:5%; }
 
-.card:hover::before {
-  opacity: 0.42;
-  transform: translateX(-50%) scale(1.3);
-}
-
-.card:hover::after {
-  opacity: 1;
-  left: 0%; right: 0%;
-}
-
-/* icon wrapper */
-.card-icon {
-  font-size: 2.4rem;
-  margin-bottom: 14px;
-  display: block;
-  filter: drop-shadow(0 0 8px var(--c1));
-  transition: transform 0.3s ease;
-}
-
-.card:hover .card-icon {
-  transform: scale(1.2) rotate(-5deg);
-}
-
-/* title */
+/* ── CARD TITLE ── */
 .card h2 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1.7rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, var(--c1), var(--c2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 10px;
-  transition: letter-spacing 0.3s ease;
+  font-family:'Rajdhani',sans-serif;
+  font-size:clamp(0.95rem,1.5vw,1.55rem);
+  font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--c1) 20%,var(--c2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  transition:letter-spacing 0.3s ease,filter 0.3s ease;
+  position:relative;z-index:1;padding:0 12px;text-align:center;line-height:1.2;
 }
-
-.card:hover h2 {
-  letter-spacing: 2.5px;
-}
-
-
+.card:hover h2 { letter-spacing:2.5px; }
 
 /* ── FOOTER ── */
 footer {
-  text-align: center;
-  padding: 22px 20px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  color: rgba(180,200,230,0.4);
-  font-size: 0.82rem;
-  letter-spacing: 1.5px;
-  position: relative;
-  z-index: 1;
+  text-align:center;padding:18px 20px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  color:rgba(180,200,230,0.4);font-size:0.82rem;letter-spacing:1.5px;
+  position:relative;z-index:1;
 }
 
-/* ── MOBILE ── */
-@media (max-width: 900px) {
-  .grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .card h2 { font-size: 1rem; }
-  .card-icon { font-size: 1.6rem; }
-}
-@media (max-width: 600px) {
-  .grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(8, 1fr); gap: 10px; }
-  .card h2 { font-size: 1.1rem; }
-}
-@media (max-width: 380px) {
-  .grid { grid-template-columns: 1fr 1fr; }
-}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){ .grid{grid-template-columns:repeat(4,1fr);gap:10px} .card h2{font-size:0.9rem} }
+@media(max-width:600px){ .grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(8,1fr);gap:10px} .card h2{font-size:1rem} }
 </style>
 </head>
 <body>
 
-<!-- ANIMATED BACKGROUND -->
 <div class="bg-canvas">
   <div class="aurora"></div>
   <div class="aurora"></div>
@@ -404,110 +205,148 @@ footer {
   <div class="container">
     <div class="grid">
 
+      <!-- =====================================================
+           EDIT HYPERLINKS BELOW
+           Replace the href="..." value with your actual URL
+           Example: href="http://yoursite.com/IED.html"
+                or: href="IED.html"  (for same folder)
+                or: href="\\server\share\IED.html"  (network path)
+           ===================================================== -->
+
+      <!-- Button 1 -->
       <a class="card" href="IED.html">
-        <span class="card-icon">⚙️</span>
+        <div class="top-bar"></div>
         <h2>IED</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 2 -->
       <a class="card" href="Assembly.html">
-        <span class="card-icon">🔧</span>
+        <div class="top-bar"></div>
         <h2>Assembly</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 3 -->
       <a class="card" href="HR.html">
-        <span class="card-icon">👥</span>
+        <div class="top-bar"></div>
         <h2>HR</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 4 -->
       <a class="card" href="ROP.html">
-        <span class="card-icon">📋</span>
+        <div class="top-bar"></div>
         <h2>ROP</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 5 -->
       <a class="card" href="DE.html">
-        <span class="card-icon">🔬</span>
+        <div class="top-bar"></div>
         <h2>D&amp;E</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 6 -->
       <a class="card" href="CapitalBudget.html">
-        <span class="card-icon">💰</span>
+        <div class="top-bar"></div>
         <h2>Capital Budget</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 7 -->
       <a class="card" href="Awards.html">
-        <span class="card-icon">🏆</span>
+        <div class="top-bar"></div>
         <h2>Awards</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 8 -->
       <a class="card" href="ShopImprovement.html">
-        <span class="card-icon">🏭</span>
+        <div class="top-bar"></div>
         <h2>Shop Improvement</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 9 -->
       <a class="card" href="Testing.html">
-        <span class="card-icon">🧪</span>
+        <div class="top-bar"></div>
         <h2>Testing</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 10 -->
       <a class="card" href="Fabrication.html">
-        <span class="card-icon">🏗️</span>
+        <div class="top-bar"></div>
         <h2>Fabrication</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 11 -->
       <a class="card" href="OfficialLanguage.html">
-        <span class="card-icon">🌐</span>
+        <div class="top-bar"></div>
         <h2>Official Language</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 12 -->
       <a class="card" href="SBUProductPortfolio.html">
-        <span class="card-icon">📦</span>
+        <div class="top-bar"></div>
         <h2>SBU Product Portfolio</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 13 -->
       <a class="card" href="QMS.html">
-        <span class="card-icon">📊</span>
+        <div class="top-bar"></div>
         <h2>QMS</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 14 -->
       <a class="card" href="QA.html">
-        <span class="card-icon">✅</span>
+        <div class="top-bar"></div>
         <h2>QA</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 15 -->
       <a class="card" href="QCC.html">
-        <span class="card-icon">🔍</span>
+        <div class="top-bar"></div>
         <h2>QCC</h2>
+        <div class="bottom-bar"></div>
       </a>
 
+      <!-- Button 16 -->
       <a class="card" href="CommunicationMeet.html">
-        <span class="card-icon">🗣️</span>
+        <div class="top-bar"></div>
         <h2>Communication Meet</h2>
+        <div class="bottom-bar"></div>
       </a>
 
     </div>
   </div>
 
-  <footer>© 2026 NS-2 Department Website</footer>
-
+  <footer>&#169; 2026 NS-2 Department Website</footer>
 </div>
 
 <script>
-// Generate twinkling stars
-const starsEl = document.getElementById('stars');
-for (let i = 0; i < 120; i++) {
-  const s = document.createElement('div');
+var starsEl = document.getElementById('stars');
+for (var i = 0; i < 120; i++) {
+  var s = document.createElement('div');
   s.className = 'star';
-  const size = Math.random() * 2.5 + 0.5;
-  s.style.cssText = `
-    width:${size}px; height:${size}px;
-    top:${Math.random()*100}%;
-    left:${Math.random()*100}%;
-    animation-duration:${2 + Math.random()*4}s;
-    animation-delay:${Math.random()*5}s;
-  `;
+  var size = Math.random() * 2.5 + 0.5;
+  s.style.cssText =
+    'width:' + size + 'px;height:' + size + 'px;' +
+    'top:' + (Math.random()*100) + '%;' +
+    'left:' + (Math.random()*100) + '%;' +
+    'animation-duration:' + (2 + Math.random()*4) + 's;' +
+    'animation-delay:' + (Math.random()*5) + 's;';
   starsEl.appendChild(s);
 }
 </script>
+
 </body>
   </html>
   
